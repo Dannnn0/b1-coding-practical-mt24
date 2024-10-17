@@ -61,7 +61,8 @@ class Trajectory:
         plt.plot(mission.reference, 'r', linestyle='--', label='Reference')
         plt.legend(loc='upper right')
         plt.show()
-
+    
+import pandas as pd
 @dataclass
 class Mission:
     reference: np.ndarray
@@ -73,7 +74,7 @@ class Mission:
         (reference, cave_height, cave_depth) = generate_reference_and_limits(duration, scale)
         return cls(reference, cave_height, cave_depth)
     
-    import pandas as pd
+    
 
     @classmethod
     def from_csv(cls, file_name: str):
@@ -82,9 +83,9 @@ class Mission:
         data = pd.read_csv(file_name)
         
         # Extract the reference, cave height, and cave depth from the CSV
-        reference = data['reference'].to_numpy
-        cave_height = data['cave_height'].to_numpy
-        cave_depth = data['cave_depth'].to_numpy
+        reference = data['reference'].to_numpy()
+        cave_height = data['cave_height'].to_numpy()
+        cave_depth = data['cave_depth'].to_numpy()
 
         # Return an instance of the Mission class with the extracted data
         return cls(reference, cave_height, cave_depth)
