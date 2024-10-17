@@ -3,6 +3,8 @@ from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
 from .terrain import generate_reference_and_limits
+import pandas as pd
+from control import PDController  # Import the PDController from the control module
 
 class Submarine:
     def __init__(self):
@@ -62,7 +64,6 @@ class Trajectory:
         plt.legend(loc='upper right')
         plt.show()
     
-import pandas as pd
 @dataclass
 class Mission:
     reference: np.ndarray
@@ -111,6 +112,7 @@ class ClosedLoop:
             positions[t] = self.plant.get_position()
             observation_t = self.plant.get_depth()
             # Call your controller here
+            actions[t] = self.controller.compute_action(mission.reference[t],observation_t)
             self.plant.transition(actions[t], disturbances[t])
 
         return Trajectory(positions)
