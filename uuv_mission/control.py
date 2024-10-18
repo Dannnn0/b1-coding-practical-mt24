@@ -1,5 +1,5 @@
 class PDController:
-    def __init__(self, kp=0.15, kd=0.6):
+    def __init__(self, kp=0.13, kd=0.60):
         self.kp = kp  # Proportional gain
         self.kd = kd  # Derivative gain
         self.prev_error = 0  # Previous error initialized to 0
